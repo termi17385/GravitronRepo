@@ -7,7 +7,7 @@ public enum ScoreTypes
 	BonusTime,
 	None
 }
-public static class Scoring
+public static class ScoreUtil
 {
 	public static ScoreTypes score = ScoreTypes.None; 
 	public static int ScoreHandler(ScoreTypes _score, int _amt)

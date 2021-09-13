@@ -11,14 +11,14 @@ public class ScreenWrapping : MonoBehaviour
     [SerializeField] bool isWrappingY = false;
 
     // if at least one renderer is visible, return true
-    bool CheckRenderers() { return renderers.Any(_renderer => _renderer.isVisible); } 
     private void Awake() 
     { 
         if(renderers.Count <= 0) renderers.Add(GetComponent<Renderer>());
-        cam = FindObjectOfType<Camera>(); 
+        //cam = FindObjectOfType<Camera>(); 
     } 
     private void Update() => ScreenWrap();
 
+    bool CheckRenderers() => IsVisibleFrom(renderers[0], cam); 
     private void ScreenWrap()
     {
         var isVisible = CheckRenderers();
@@ -47,5 +47,11 @@ public class ScreenWrapping : MonoBehaviour
         //    isWrappingY = true;
         //}
         transform.position = newPosition;
+    }
+    
+    private bool IsVisibleFrom(Renderer renderer, Camera camera)
+    {
+        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(camera);
+        return GeometryUtility.TestPlanesAABB(planes, renderer.bounds);
     }
 }
