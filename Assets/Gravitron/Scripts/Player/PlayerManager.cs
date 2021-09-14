@@ -1,4 +1,6 @@
 using Gravitron.AI;
+using Gravitron.Settings;
+
 using System;
 using System.Collections.Generic;
 
@@ -11,33 +13,28 @@ namespace Gravitron.Player
 {
     public class PlayerManager : MonoBehaviour
     {
+        [Header("Stats")]
         [SerializeField] private float playerHealth;
         [SerializeField] private float endCount;
         
         [NonSerialized] public bool groundedDamage;
         [NonSerialized] public float count;
+        
+        [SerializeField] private GameObject mobileControls;
 
         private float maxHealth = 100;
         private PlayerController pController;
-        private List<WaypointHandler> pickupPoints = new List<WaypointHandler>();
             
         [Header("Inventory")] 
         public float fuel;
         public float shield;
         public float spaceMen;
 
-        private void Awake() 
-        {
-            var objects = FindObjectsOfType<WaypointHandler>();
-            foreach(var waypoint in objects)
-                if(waypoint.CompareTag("Friendlies"))
-                    pickupPoints.Add(waypoint);
-            
-        }
         private void Start()
         {
             playerHealth = maxHealth;
             pController = GetComponent<PlayerController>();
+            mobileControls.SetActive(PlatformUtil.mobileMode);
         }
 
         private void LateUpdate()

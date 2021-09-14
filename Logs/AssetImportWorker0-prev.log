@@ -15,11 +15,11 @@ E:/UnityProject/GitHubFiles/Gravitron
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-57914
+64824
 Successfully changed project path to: E:/UnityProject/GitHubFiles/Gravitron
 E:/UnityProject/GitHubFiles/Gravitron
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 103.95 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 59.48 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.2.2f1 (068178b99f32)
 [Subsystems] Discovering subsystems at path C:/Users/Josh/Documents/Unity/Editors/2020.2.2f1/Editor/Data/Resources/UnitySubsystems
@@ -35,92 +35,21 @@ Initialize mono
 Mono path[0] = 'C:/Users/Josh/Documents/Unity/Editors/2020.2.2f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Users/Josh/Documents/Unity/Editors/2020.2.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Users/Josh/Documents/Unity/Editors/2020.2.2f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56960
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56952
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Users/Josh/Documents/Unity/Editors/2020.2.2f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Users/Josh/Documents/Unity/Editors/2020.2.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.006666 seconds.
+Registered in 0.017170 seconds.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 54.52 ms, found 1 plugins.
+Refreshing native plugins compatible for Editor in 2489.32 ms, found 1 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  8.696 seconds
+- Completed reload, in 19.275 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.004988 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 63.42 ms, found 1 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.829 seconds
-Platform modules already initialized, skipping
-========================================================================
-Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.09 seconds
-Refreshing native plugins compatible for Editor in 0.53 ms, found 1 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2057 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 94.3 MB.
-System memory in use after: 94.4 MB.
-
-Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 2494.
-Total: 3.176300 ms (FindLiveObjects: 0.438200 ms CreateObjectMapping: 0.185900 ms MarkObjects: 2.508400 ms  DeleteObjects: 0.041000 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/Gravitron/Scenes/SampleScene.unity
-  artifactKey: Guid(2cda990e2423bbf4892e6590ba056729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Gravitron/Scenes/SampleScene.unity using Guid(2cda990e2423bbf4892e6590ba056729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '11f54b9eb1e9c3027152e8ab83f76dd0') in 0.036641 seconds
-  Import took 0.043800 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000622 seconds.
-  path: Assets/Gravitron/Scenes
-  artifactKey: Guid(bbbc74fad6ed1d243aee6102298f428b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Gravitron/Scenes using Guid(bbbc74fad6ed1d243aee6102298f428b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '819adbf3453530152bec2c0d3d8a7bbd') in 0.014126 seconds
-  Import took 0.020947 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.997464 seconds.
-  path: Assets/Gravitron/Scenes/TerrainTestingGrounds.unity
-  artifactKey: Guid(f28d4bf93e45ce34ebd88b78f4f5e94c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Gravitron/Scenes/TerrainTestingGrounds.unity using Guid(f28d4bf93e45ce34ebd88b78f4f5e94c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e37f04c2159643522c81f9dc10b8d78') in 0.015859 seconds
-  Import took 0.024239 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 328.932489 seconds.
-  path: Assets/Gravitron/Sprites/ShipTypeOne.png
-  artifactKey: Guid(cca467818dac734498c6cb4d27a037cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Gravitron/Sprites/ShipTypeOne.png using Guid(cca467818dac734498c6cb4d27a037cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2737a99664cf10490ebe91fc9ed000b7') in 0.295356 seconds
-  Import took 0.301057 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.407026 seconds.
-  path: Assets/Gravitron/Sprites/level.png
-  artifactKey: Guid(db62889c568b73146b45e7f4b954384e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Gravitron/Sprites/level.png using Guid(db62889c568b73146b45e7f4b954384e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b2bdb3acdd2d3ca2e860afb4283c3e9') in 0.035094 seconds
-  Import took 0.041515 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 20.864996 seconds.
-  path: Assets/Gravitron/Sprites/level.png
-  artifactKey: Guid(db62889c568b73146b45e7f4b954384e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Gravitron/Sprites/level.png using Guid(db62889c568b73146b45e7f4b954384e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '241e3aee20f5c0dabaffdf116810c6b0') in 0.062761 seconds
-  Import took 0.073849 seconds .
-
-AssetImportWorkerClient::OnTransportError - code=2 error=End of file
+Registered in 0.001342 seconds.

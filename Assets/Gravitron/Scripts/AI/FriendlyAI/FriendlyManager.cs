@@ -12,6 +12,7 @@ public class FriendlyManager : MonoBehaviour
 	[SerializeField] private GameObject player, waypoints;
 
 	private int index = 0;
+	[SerializeField] private bool boardingMode;
 
 	private void Update()
 	{
@@ -20,10 +21,8 @@ public class FriendlyManager : MonoBehaviour
 			Destroy(waypoints);
 			Destroy(gameObject);
 		}
-	}
-	private void OnTriggerStay2D(Collider2D _other)
-	{
-		if(_other.CompareTag("Player"))
+		
+		if(boardingMode)
 		{
 			if(player.GetComponent<ShipLandingGear>().hasLanded)
 			{
@@ -36,11 +35,19 @@ public class FriendlyManager : MonoBehaviour
 			}
 		}
 	}
+	private void OnTriggerEnter2D(Collider2D _other)
+	{
+		if(_other.CompareTag("Player"))
+			boardingMode = true;
+	}
 
 	private void OnTriggerExit2D(Collider2D _other)
 	{
 		if(_other.CompareTag("Player"))
+		{
+			boardingMode = false;
 			foreach(var agent in agents)
 				agent.ChangeState(AgentStates.Waypoints);
+		}
 	}
 }

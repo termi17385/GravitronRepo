@@ -10,8 +10,6 @@ namespace Gravitron.AI
 
         protected override void Start()
         {
-            shipTarget = FindObjectOfType<PlayerController>().transform;
-            
             base.Start();
             states.Add(AgentStates.Waypoints, delegate { MoveTowardsTarget(waypoint, true);});
             states.Add(AgentStates.Board, delegate { MoveTowardsTarget(shipTarget); BeamMeUpScotty();});
@@ -21,6 +19,7 @@ namespace Gravitron.AI
         /// collection of the agent </summary>
         public void BeamMeUpScotty()
         {
+            shipTarget = FindObjectOfType<PlayerController>().transform;
             if(Vector2.Distance(transform.position, shipTarget.position) <= 0.2f)
             {
                 shipTarget.GetComponent<PlayerManager>().CollectUnit();
