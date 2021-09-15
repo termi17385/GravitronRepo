@@ -1,5 +1,6 @@
 using Gravitron.AI;
 using Gravitron.Settings;
+using Gravitron.Utils;
 
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace Gravitron.Player
         [NonSerialized] public float count;
         
         [SerializeField] private GameObject mobileControls;
+        [SerializeField] private MeshRenderer healthBar;
+        private Material healthBarShader;
 
         private float maxHealth = 100;
         private PlayerController pController;
@@ -34,7 +37,9 @@ namespace Gravitron.Player
         {
             playerHealth = maxHealth;
             pController = GetComponent<PlayerController>();
+            
             mobileControls.SetActive(PlatformUtil.mobileMode);
+            healthBarShader = healthBar.materials[0];
         }
 
         private void LateUpdate()
@@ -44,6 +49,9 @@ namespace Gravitron.Player
 
         private void Update()
         {
+            var shaderVal = ShaderUtils.healthShader;
+            playerHealth = Mathf.Clamp(playerHealth, 0, 100);
+            healthBarShader.SetFloat(shaderVal,  Mathf.Clamp01(playerHealth / maxHealth));
         }
 
         private void HandleGroundedDamage()
