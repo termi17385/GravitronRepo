@@ -6,7 +6,7 @@ public class ScreenWrapping : MonoBehaviour
 {
     [SerializeField] private List<Renderer> renderers;
     [SerializeField] private Camera cam;
-    
+    [SerializeField] private Transform teleportWithPlayer, teleportWithPlayer1;
     [SerializeField] bool isWrappingX = false;
     [SerializeField] bool isWrappingY = false;
 
@@ -47,6 +47,8 @@ public class ScreenWrapping : MonoBehaviour
         //    isWrappingY = true;
         //}
         transform.position = newPosition;
+        teleportWithPlayer.position = newPosition;
+        teleportWithPlayer1.position = newPosition;
     }
     
     private bool IsVisibleFrom(Renderer renderer, Camera camera)

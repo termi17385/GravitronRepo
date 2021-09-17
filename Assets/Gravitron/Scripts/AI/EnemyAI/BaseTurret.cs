@@ -10,15 +10,25 @@ namespace Gravitron.AI
     {
         [SerializeField] private LayerMask dontDetectPlayer;
         private Transform player;
-        
-        [Header("Debugging")]
+        #region Properties
+        protected float Timer => timer;
+        protected float ProjectileForce => projectileForce;
+        protected int AmmoCount => ammoAmount;
+        #endregion
+        [Header("Shooting Timers")]
         [SerializeField] private float timerMax;
-        [SerializeField] private float radius;
         [SerializeField] private float timer;
+        
+        [Header("Weapon Settings")]
         [SerializeField] private float projectileForce;
-        [SerializeField] private float offset;
         [SerializeField] private int ammoAmount;
-        [SerializeField] private List<GameObject> projectiles = new List<GameObject>();
+
+        [Header("Extra Stuff")]
+        [SerializeField] protected float radius;
+        
+        [Header("SEND HELP")]
+        [SerializeField] protected List<GameObject> projectiles = new List<GameObject>();
+        [SerializeField] protected AudioSource shootingAudio;
 
         protected override void Start()
         {
@@ -27,6 +37,7 @@ namespace Gravitron.AI
             ChangeState(AgentStates.Shoot);
             base.Start();
 
+            shootingAudio = GetComponent<AudioSource>();
             for(int i = 0; i < ammoAmount; i++)
             {
                 string resourcesPath = "Projectiles/standard";
@@ -35,10 +46,10 @@ namespace Gravitron.AI
             }
         }
 
-        private int index = 0;
+        private int index2 = 0;
         private void Shoot()
         {
-            if(Vector2.Distance(player.position, transform.position) <= radius)
+            if(Vector2.Distance(player.position, transform.position) <= radius && !player.GetComponent<PlayerManager>().isDead)
             {
                 timer += Time.deltaTime;
                 if(timer >= timerMax)
@@ -48,10 +59,10 @@ namespace Gravitron.AI
                     if(hit.collider) color = Color.red;
                     if(!hit.collider && projectiles.Count > 0)
                     {
-                        if(index >= projectiles.Count) index = 0;
-                        if(!projectiles[index].activeSelf)
+                        if(index2 >= projectiles.Count) index2 = 0;
+                        if(!projectiles[index2].activeSelf)
                         {
-                            var projectile = projectiles[index];
+                            var projectile = projectiles[index2];
 
                             projectile.GetComponent<Animator>().enabled = false;
                             projectile.SetActive(true);
@@ -60,14 +71,15 @@ namespace Gravitron.AI
                             var rb = projectile.GetComponent<Rigidbody2D>();
                             rb.velocity = Vector2.ClampMagnitude(rb.velocity, 0);
 
-                            var pRb = player.GetComponent<Rigidbody2D>();
-                            var dir = ((player.position * offset) - transform.position).normalized;
-                            var dir2 = ((player.position + PlayerVelocity(pRb.velocity)) - transform.position).normalized;
+                            //var pRb = player.GetComponent<Rigidbody2D>();
+                            var dir = ((player.position) - transform.position).normalized;
+                            //var dir2 = ((player.position + (PlayerVelocity(pRb.velocity) * 0.5f)) - transform.position).normalized;
 
-                            var usedDir = index % 2 == 0 ? dir : dir2;
-                            rb.AddForce(usedDir * projectileForce);
+                            //var usedDir = index % 2 == 0 ? dir : dir2;
+                            rb.AddForce(dir * projectileForce);
+                            shootingAudio.Play();
                         } 
-                        index++;
+                        index2++;
                     }
                     Debug.DrawLine(transform.position, player.position, color);
                     timer = 0;

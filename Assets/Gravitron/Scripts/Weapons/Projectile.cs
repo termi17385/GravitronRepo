@@ -1,8 +1,11 @@
 using System.Collections;
+using Gravitron.Player;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+	[SerializeField] private AudioSource deathSound;
+	
 	private void OnEnable()
 	{
 		var color = GetComponentsInChildren<SpriteRenderer>();
@@ -12,21 +15,34 @@ public class Projectile : MonoBehaviour
 			aColor.a = 255;
 			a.color = aColor;
 		}
-		
 		StartCoroutine(Despawn());
 	}
 
-	private void OnDisable()
+	private void OnCollisionEnter2D(Collision2D _other)
 	{
+		if(_other.collider.CompareTag("Player"))
+		{
+			var player = _other.gameObject.GetComponent<PlayerManager>();
+			player.DamagePlayer(10);
+		}
+
+		if(!_other.collider.CompareTag("Enemy"))
+		{
+			var rb = GetComponent<Rigidbody2D>();
+			rb.velocity = Vector2.ClampMagnitude(rb.velocity, 0);
+			
+			var o = Instantiate(Resources.Load<GameObject>("Effects/Explosion"), transform.position, Quaternion.identity);
+			deathSound = o.GetComponent<AudioSource>();
+			deathSound.Play();
+			
+			HitObjectDisable();
+			gameObject.SetActive(false);
+		}
 	}
 
 	/// <summary> Handles what happens if the
 	/// projectile hits an object </summary>
-	private void HitObjectDisable()
-	{
-		StopCoroutine(Despawn());
-	}
-	
+	private void HitObjectDisable() => StopCoroutine(Despawn());
 	IEnumerator Despawn()
 	{
 		yield return new WaitForSeconds(5);

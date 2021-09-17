@@ -159,11 +159,9 @@ namespace Gravitron.Old
 					{
 						var go = points[0].gameObject;
 						points[0] = null;
-						DestroyImmediate(go);
 				
 						go = points[1].gameObject;
 						points[1] = null;
-						DestroyImmediate(go);
 					
 						destroy = false;
 					}
