@@ -1,5 +1,6 @@
 using Gravitron.Player;
 
+using System;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -29,11 +30,12 @@ namespace Gravitron.AI
         [Header("SEND HELP")]
         [SerializeField] protected List<GameObject> projectiles = new List<GameObject>();
         [SerializeField] protected AudioSource shootingAudio;
+        [NonSerialized] public bool isDead;
 
+        protected void Awake() => player = FindObjectOfType<PlayerManager>().transform; 
         protected override void Start()
         {
             states.Add(AgentStates.Shoot, Shoot);
-            player = FindObjectOfType<PlayerManager>().transform;
             ChangeState(AgentStates.Shoot);
             base.Start();
 
@@ -41,12 +43,14 @@ namespace Gravitron.AI
             for(int i = 0; i < ammoAmount; i++)
             {
                 string resourcesPath = "Projectiles/standard";
-                projectiles.Add(Instantiate(Resources.Load<GameObject>(resourcesPath), transform));
+                projectiles.Add(Instantiate(Resources.Load<GameObject>(resourcesPath), ammoPool));
                 projectiles[i].SetActive(false);
             }
         }
 
         private int index2 = 0;
+        [SerializeField] private Transform ammoPool;
+
         private void Shoot()
         {
             if(Vector2.Distance(player.position, transform.position) <= radius && !player.GetComponent<PlayerManager>().isDead)
@@ -86,7 +90,6 @@ namespace Gravitron.AI
                 }
             }
         }
-        
         /// <summary> Converts the 2D velocity into a vector3 </summary>
         /// <param name="_playerVel">the players rb velocity</param>
         private Vector3 PlayerVelocity(Vector2 _playerVel) => new Vector3(_playerVel.x, _playerVel.y, transform.position.z);
@@ -94,6 +97,15 @@ namespace Gravitron.AI
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, radius);
+        }
+
+        public virtual void KillMe()
+        {
+            isDead = true;
+            var obj = Resources.Load<GameObject>("Effects/eExplosion");
+            Instantiate(obj, transform.position, transform.localRotation);
+            Debug.Log("HitMe: dead");
+            gameObject.SetActive(false);
         }
     }
 }

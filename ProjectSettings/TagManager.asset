@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Friendlies
   - Enemy
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -18,9 +19,9 @@ TagManager:
   - SpaceMen
   - Enemy
   - Ignore
-  - 
-  - 
-  - 
+  - PostPro
+  - Projectile
+  - EnemyProjectile
   - 
   - 
   - 

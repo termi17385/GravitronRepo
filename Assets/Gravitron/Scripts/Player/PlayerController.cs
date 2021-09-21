@@ -17,15 +17,22 @@ namespace Gravitron.Player
 		[Header("Misc"), Space]
 		public Rigidbody2D rb2d;
 		public bool isFlying;
+		
 		private bool mobileflight;
+		private ShipLandingGear landing;
+		
+		private void Awake()
+		{
+			rb2d = GetComponent<Rigidbody2D>();
+			landing = GetComponent<ShipLandingGear>();
+		}
 
-		private void Awake() => rb2d = GetComponent<Rigidbody2D>();
 		private void FixedUpdate() { if(isFlying) Flight(); }
 
 		private void Update()
 		{
 			isFlying = Input.GetKey(KeyCode.W) || mobileflight;
-			if(isFlying)
+			if(isFlying && !landing.hasLanded)
 			{
 				thruster.Play();
 				rotationalSpeed = 250;

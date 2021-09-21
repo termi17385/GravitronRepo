@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
 			player.DamagePlayer(10);
 		}
 
-		if(!_other.collider.CompareTag("Enemy"))
+		if(!_other.collider.CompareTag("Enemy") && !_other.collider.CompareTag("Projectile"))
 		{
 			var rb = GetComponent<Rigidbody2D>();
 			rb.velocity = Vector2.ClampMagnitude(rb.velocity, 0);

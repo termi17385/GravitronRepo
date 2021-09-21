@@ -156,7 +156,19 @@ namespace Gravitron.Player
 
 		private void OnCollisionEnter2D(Collision2D _other) {
 			if(_other.collider.CompareTag("Ground"))
-				if(!hasLanded) pManager.DamagePlayer(5);
+			{
+				if(!hasLanded)
+				{
+					GetComponent<PolygonCollider2D>().sharedMaterial.bounciness = 1;
+					pManager.DamagePlayer(5);
+				}
+			}
+			else if(hasLanded)
+			{
+				pManager.groundedDamage = false;
+				GetComponent<PolygonCollider2D>().sharedMaterial.bounciness = 0;
+				pManager.count = 0;					
+			}
 		}
 		private void OnCollisionStay2D(Collision2D _other)
 		{
@@ -168,6 +180,7 @@ namespace Gravitron.Player
 				if(!hasLanded)
 				{
 					pManager.groundedDamage = false;
+					GetComponent<PolygonCollider2D>().sharedMaterial.bounciness = 1;
 					pManager.count = 0;
 				}
 		}

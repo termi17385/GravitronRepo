@@ -7,15 +7,17 @@ using UnityEngine;
 using System;
 using TMPro;
 
+using UnityEditor;
+
 using static System.Boolean;
 
 namespace Gravitron.Settings
 {
 	public class MainMenu : MonoBehaviour
 	{
-		public float Mastertext => Mathf.Round((masterVal + 80) / 120 * 100);
-		public float Musictext => Mathf.Round((musicVal + 80) / 100 * 100);
-		public float SfxText => Mathf.Round((sfxVal + 80) / 100 * 100);
+		public float Mastertext => Mathf.Round((masterVal + 60) / 80 * 100);
+		public float Musictext => Mathf.Round((musicVal + 60) / 80 * 100);
+		public float SfxText => Mathf.Round((sfxVal + 60) / 80 * 100);
 
 		[Header("Display")] [SerializeField] private List<string> options = new List<string>();
 		[SerializeField] private TMP_Dropdown resDown;
@@ -96,8 +98,11 @@ namespace Gravitron.Settings
 		/// <param name="_resolutionIndex">A value for changing the resolution</param>
 		public void SetResolution(int _resolutionIndex)
 		{
-			Resolution res = resolutionArray[resolutionIndex = _resolutionIndex];
-			Screen.SetResolution(res.width, res.height, fullscreen);
+			if(_resolutionIndex < resolutionArray.Length)
+			{
+				Resolution res = resolutionArray[resolutionIndex = _resolutionIndex];
+				Screen.SetResolution(res.width, res.height, fullscreen);
+			}
 		}
 
 		/// <summary> sets whether the game
@@ -182,7 +187,7 @@ namespace Gravitron.Settings
 
 			TryParse(screenData, out bool fullscreenData);
 			SetFullScreen(fullscreenToggle.isOn = fullscreenData);
-			SetResolution(resDown.value = fIndex);
+			if(!PlatformUtil.mobileMode)SetResolution(resDown.value = fIndex);
 			SetGraphics(grapDown.value = gIndex);
 			SetUpSliders(sMaster, master);
 			SetUpSliders(sMusic, music);
@@ -195,6 +200,14 @@ namespace Gravitron.Settings
 		public void ChangeScene(string _scene)
 		{
 			SceneManager.LoadScene(_scene);
+		}
+
+		public void QuitGame()
+		{
+		#if UNITY_EDITOR
+			EditorApplication.ExitPlaymode();
+		#endif
+			Application.Quit();
 		}
 	}
 }

@@ -19,6 +19,7 @@ namespace Gravitron.AI
         /// collection of the agent </summary>
         public void BeamMeUpScotty()
         {
+            moveSpeed = 1;
             shipTarget = FindObjectOfType<PlayerController>().transform;
             if(Vector2.Distance(transform.position, shipTarget.position) <= 0.2f)
             {

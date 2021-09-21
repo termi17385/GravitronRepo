@@ -5287,6 +5287,7 @@ MonoBehaviour:
   mobileControls: {fileID: 0}
   healthBar: {fileID: 0}
   rocketAudio: {fileID: 864013062}
+  mainCam: {fileID: 0}
   fuel: 0
   shield: 0
   spaceMen: 0
