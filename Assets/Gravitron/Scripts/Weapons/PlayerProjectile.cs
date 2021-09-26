@@ -53,6 +53,11 @@ public class PlayerProjectile : MonoBehaviour
 			{
 				turret.KillMe();
 			}
+
+			if(obj.TryGetComponent(out Objective objective))
+			{
+				objective.Damage(10);
+			}
 		}
 		ProjectileDeath();
 	}

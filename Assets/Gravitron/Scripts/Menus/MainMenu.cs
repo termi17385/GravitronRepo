@@ -1,15 +1,13 @@
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using static System.Boolean;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEditor;
 using System.Linq;
 using UnityEngine;
-using System;
 using TMPro;
 
-using UnityEditor;
-
-using static System.Boolean;
 
 namespace Gravitron.Settings
 {
@@ -18,6 +16,8 @@ namespace Gravitron.Settings
 		public float Mastertext => Mathf.Round((masterVal + 60) / 80 * 100);
 		public float Musictext => Mathf.Round((musicVal + 60) / 80 * 100);
 		public float SfxText => Mathf.Round((sfxVal + 60) / 80 * 100);
+
+		[SerializeField] private GameObject tutorialView, tutorialUI, cameraView;
 
 		[Header("Display")] [SerializeField] private List<string> options = new List<string>();
 		[SerializeField] private TMP_Dropdown resDown;
@@ -208,6 +208,16 @@ namespace Gravitron.Settings
 			EditorApplication.ExitPlaymode();
 		#endif
 			Application.Quit();
+		}
+
+		private bool tutorial = false;
+		public void TutorialMenus()
+		{
+			tutorial = !tutorial;
+			
+			tutorialView.SetActive(tutorial);
+			tutorialUI.SetActive(tutorial);
+			cameraView.SetActive(!tutorial);
 		}
 	}
 }

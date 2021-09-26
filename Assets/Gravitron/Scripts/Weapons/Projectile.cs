@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
 		if(_other.collider.CompareTag("Player"))
 		{
 			var player = _other.gameObject.GetComponent<PlayerManager>();
-			player.DamagePlayer(10);
+			player.DamagePlayer(30);
 		}
 
 		if(!_other.collider.CompareTag("Enemy") && !_other.collider.CompareTag("Projectile"))

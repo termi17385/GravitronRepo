@@ -7,6 +7,15 @@ public class JukeBox : MonoBehaviour
     [SerializeField] private AudioSource mainMusic, pauseMusic; 
     [SerializeField] private List<AudioClip> clips = new List<AudioClip>();
     
+    private void Start()
+    {
+        Paused.paused = false;
+        mainMusic.Play();
+        pauseMusic.Play();
+        mainMusic.Pause();
+        pauseMusic.Pause();
+    }
+    
     // Update is called once per frame
     void Update()
     {

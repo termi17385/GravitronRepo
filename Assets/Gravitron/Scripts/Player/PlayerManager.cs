@@ -44,7 +44,7 @@ namespace Gravitron.Player
         [Header("Inventory")] 
         public float fuel;
         public float shield;
-        public float spaceMen;
+        public int spaceMen;
 
         public static bool objectiveDestoryed = false;
 
@@ -158,7 +158,10 @@ namespace Gravitron.Player
                     if(objectiveDestoryed)
                     {
                         winMenu.SetActive(true);
+                        ScoreUtil.ScoreHandler(ScoreTypes.SpaceMen, spaceMen);
                         Cursor.lockState = CursorLockMode.None;
+                        
+                        leavingAreaMenu.SetActive(false);
                         gameObject.SetActive(false);                        
                     }
                     else SceneManager.LoadScene("LevelOne");
